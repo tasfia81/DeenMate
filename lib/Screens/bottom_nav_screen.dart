@@ -5,7 +5,7 @@ import '../controllers/bottom_nav_controller.dart';
 import 'home_screen.dart';
 import 'tasbih_screen.dart';
 import 'quran_screen.dart';
-import 'ai_screen.dart';
+import 'ai_chat_screen.dart';
 import 'prayer_screen.dart';
 
 class BottomNavScreen extends StatelessWidget {
@@ -19,7 +19,7 @@ class BottomNavScreen extends StatelessWidget {
     HomeScreen(),
     TasbihScreen(),
     QuranScreen(),
-    AIScreen(),
+    AiChatScreen(),
     PrayerScreen(),
   ];
 
@@ -44,14 +44,14 @@ class BottomNavScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
 
-              _navItem(Icons.home, 'Home', 0),
-              _navItem(Icons.fingerprint, 'Tasbih', 1),
+              _navItem(Icons.home, 'Home  ', 0),
+              _navItem(Icons.fingerprint, 'Tasbih  ', 1),
 
               // CENTER QURAN BUTTON
               _quranButton(),
 
-              _navItem(Icons.smart_toy, 'AI', 3),
-              _navItem(Icons.favorite, 'Prayer', 4),
+              _navItem(Icons.smart_toy, 'AI Chat', 3),
+              _navItem(Icons.favorite, 'Prayer Time', 4),
             ],
           ),
         ),

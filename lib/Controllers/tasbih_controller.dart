@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 
 class TasbihController extends GetxController {
-  final RxMap<String, int> dhikrCounts = <String, int>{}.obs;
+  final dhikrCounts = <String, int>{}.obs;
 
-  final List<String> dhikrList = [
+  final dhikrList = <String>[
     'SubhanAllah',
     'Alhamdulillah',
     'Allahu Akbar',
@@ -15,14 +15,13 @@ class TasbihController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    for (var dhikr in dhikrList) {
-      dhikrCounts[dhikr] = 0;
+    for (var d in dhikrList) {
+      dhikrCounts[d] = 0;
     }
   }
 
   void increment(String dhikr) {
-    final old = dhikrCounts[dhikr] ?? 0;
-    dhikrCounts[dhikr] = old + 1;
+    dhikrCounts[dhikr] = (dhikrCounts[dhikr] ?? 0) + 1;
   }
 
   void reset(String dhikr) {

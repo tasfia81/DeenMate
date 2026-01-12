@@ -17,9 +17,7 @@ class SplashScreen extends StatelessWidget {
       backgroundColor: const Color(0xFF0F3D2E), // Deep Green
       body: Center(
         child: ScreenBackground(
-            child: Text('WELCOME',style: TextStyle(
-              fontSize: 50,fontWeight: FontWeight.bold,color: Colors.white
-            ),)
+            child: Text(''),
         ),
       ),
     );

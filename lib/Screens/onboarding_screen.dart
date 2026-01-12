@@ -18,20 +18,7 @@ class OnboardingScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-
-            // 🔹 SKIP BUTTON
-            Align(
-              alignment: Alignment.topRight,
-              child: TextButton(
-                onPressed: controller.skip,
-                child: const Text(
-                  'Skip',
-                  style: TextStyle(color: Colors.grey),
-                ),
-              ),
-            ),
-
-            // 🔹 PAGE VIEW
+            ///================================ PAGE VIEW ==================================
             Expanded(
               child: PageView(
                 controller: controller.pageController,
@@ -43,17 +30,17 @@ class OnboardingScreen extends StatelessWidget {
                     subtitle: 'Read & listen to the Holy Quran',
                   ),
                   OnboardPage(
-                    image: AssetPaths.quranMajeed,
+                    image: AssetPaths.prayerAdhan,
                     title: 'Prayer Time',
                     subtitle: 'Never miss a single salah',
                   ),
                   OnboardPage(
-                    image: AssetPaths.quranMajeed,
+                    image: AssetPaths.ramadanCalendarAlerts,
                     title: 'Sehri & Iftar',
                     subtitle: 'Ramadan reminders made easy',
                   ),
                   OnboardPage(
-                    image: AssetPaths.quranMajeed,
+                    image: AssetPaths.duaTasbihTracker,
                     title: 'Tasbih & Dua',
                     subtitle: 'Stay connected with Allah',
                   ),
@@ -61,58 +48,93 @@ class OnboardingScreen extends StatelessWidget {
               ),
             ),
 
-            // 🔹 DOT + BUTTON
+            ///================== DOT + BUTTON ========================
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+              child: Column(
                 children: [
 
-                  // DOT INDICATOR
-                  Obx(() => Row(
-                    children: List.generate(4, (index) {
-                      return AnimatedContainer(
-                        duration: const Duration(milliseconds: 300),
-                        margin: const EdgeInsets.only(right: 6),
-                        height: 8,
-                        width: controller.currentPage.value == index ? 22 : 8,
-                        decoration: BoxDecoration(
-                          color: controller.currentPage.value == index
-                              ? const Color(0xFF0F3D2E)
-                              : Colors.grey.shade400,
-                             //   : Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      );
-                    }),
-                  )),
+                  ///===================== DOT INDICATOR ===========================
+                  Obx(
+                        () => Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(4, (index) {
+                        final isActive = controller.currentPage.value == index;
 
-                  // CUSTOM BUTTON
+                        return AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          margin: const EdgeInsets.symmetric(horizontal: 6),
+                          height: 8,
+                          width: isActive ? 26 : 8,
+                          decoration: BoxDecoration(
+                            color: isActive
+                                ? const Color(0xFF0F3D2E)
+                                : Colors.grey.shade400,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        );
+                      }),
+                    ),
+                  ),
+
+                  const SizedBox(height: 28),
+
+                  ///======================== BIG CUSTOM BUTTON ==========================
                   GestureDetector(
                     onTap: controller.nextPage,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 26,
-                        vertical: 14,
-                      ),
+                      width: double.maxFinite,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
                       decoration: BoxDecoration(
                         color: const Color(0xFF0F3D2E),
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 12,
+                            offset: const Offset(0, 6),
+                            color: const Color(0xFF0F3D2E).withOpacity(0.35),
+                          ),
+                        ],
                       ),
-                      child: Obx(() => Text(
-                        controller.currentPage.value == 3
-                            ? 'Get Started'
-                            : 'Next',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
+                      child: Center(
+                        child: Obx(
+                              () => Text(
+                            controller.currentPage.value == 3
+                                ? 'Get Started'
+                                : 'Next',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
                         ),
-                      )),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  ///======================== SKIP BUTTON =============================
+                  Obx(
+                        () => controller.currentPage.value == 3
+                        ? const SizedBox()
+                        : GestureDetector(
+                      onTap: controller.skip,
+                      child: const Text(
+                        'Skip',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 14,
+                        ),
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
+
           ],
         ),
       ),
